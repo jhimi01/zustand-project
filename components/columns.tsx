@@ -13,7 +13,7 @@ export default function Columns() {
         {/* column */}
         <Column title="Todo" status="Todo" />
         <Column title="In Progress" status="In Progress" />
-        <Column title="DONE" status="DONE" />
+        <Column title="Done" status="Done" />
       </section>
     </div>
   );

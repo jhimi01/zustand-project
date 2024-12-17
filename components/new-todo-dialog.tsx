@@ -21,23 +21,27 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
-import { useTaskStore } from "@/lib/store";
-import { type } from "node:os";
+import { useTaskStore, Status } from "@/lib/store";
 
 export default function NewTodoDialog() {
-
-    const addTask = useTaskStore(state => state.addTask)
-    const Tasks = useTaskStore(state => state.tasks)
-    const [title, setTitle] = useState("");
+  const addTask = useTaskStore((state) => state.addTask);
+  const Tasks = useTaskStore((state) => state.tasks);
+  const [title, setTitle] = useState("");
+  const [status, setStatus] = useState("");
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const desc = formData.get("desc")
+    const desc = formData.get("desc");
 
-    if (typeof title !== "string" || typeof desc !== "string") return
+    if (
+      typeof title !== "string" ||
+      typeof desc !== "string" ||
+      typeof status !== "string"
+    )
+      return;
 
-    addTask( title, desc )
+    addTask(title, desc, status);
     console.log("object submit", Tasks);
   };
 
@@ -72,7 +76,7 @@ export default function NewTodoDialog() {
                 <SelectLabel>Todo</SelectLabel>
                 <SelectItem value="Todo">Todo</SelectItem>
                 <SelectItem value="In Progress">In Progress</SelectItem>
-                <SelectItem value="DONE">DONE</SelectItem>
+                <SelectItem value="Done">Done</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
