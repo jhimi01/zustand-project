@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -37,11 +36,11 @@ export default function NewTodoDialog() {
     if (
       typeof title !== "string" ||
       typeof desc !== "string" ||
-      typeof status !== "string"
+      !["Todo", "In Progress", "Done"].includes(status)
     )
       return;
 
-    addTask(title, desc, status);
+    addTask(title, desc, status as Status);
     console.log("object submit", Tasks);
   };
 
@@ -64,7 +63,9 @@ export default function NewTodoDialog() {
           className="grid gap-4 py-4"
           onSubmit={handleSubmit}
         >
-          <Select onValueChange={setTitle}>
+          <Select onValueChange={(value) => { 
+             setTitle(value);
+             setStatus(value ); }}>
             <SelectTrigger className="w-full">
               <SelectValue
                 className="text-red-300 text-3xl"
