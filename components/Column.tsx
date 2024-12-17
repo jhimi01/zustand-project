@@ -10,8 +10,6 @@ export default function Column({
   title: string;
   status: Status;
 }) {
-
-
   // console.log("this is a value for check", title, status);
   const tasks = useTaskStore((state) => state.tasks);
 
@@ -20,7 +18,9 @@ export default function Column({
     [tasks, status]
   );
 
-  console.log("this is a value for check", tasks)
+  // const filterdTask = tasks.filter((task) => task.status === status)
+
+  console.log("this is a value for check", tasks);
 
   useEffect(() => {
     useTaskStore.persist.rehydrate();
@@ -37,15 +37,14 @@ export default function Column({
   };
 
   return (
-    <div>
+    <div className="border-2">
       <h2 className="ml-1 font-serif text-2xl font-semibold">{title}</h2>
-
       <div
-        className="mt-3 w-56 h-full flex-1 flex flex-col justify-center rounded-xl bg-red-500"
+        className="mt-3 border-2 w-56 h-full flex-1 flex flex-col justify-center rounded-xl bg-red-500"
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
       >
-        <div className="  gap-4">
+        <div className="">
           {filterdTask.map((task) => (
             <Task key={task?.id} {...task} />
           ))}

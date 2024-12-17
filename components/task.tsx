@@ -16,7 +16,8 @@ export default function Task({
   const dragTask = useTaskStore((state) => state.dragTask);
   const removeTask = useTaskStore((state) => state.removeTask);
   return (
-    <div className="flex items-center justify-center flex-col h-full w-full"
+    <div
+      className="border-2 flex items-center justify-center flex-col h-full w-full"
       draggable
       onDrag={() => {
         dragTask(id);
